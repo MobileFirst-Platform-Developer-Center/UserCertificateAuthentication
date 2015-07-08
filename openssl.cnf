@@ -1,0 +1,77 @@
+#
+#    COPYRIGHT LICENSE: This information contains sample code provided in source code form. You may copy, modify, and distribute
+#    these sample programs in any form without payment to IBM® for the purposes of developing, using, marketing or distributing
+#    application programs conforming to the application programming interface for the operating platform for which the sample code is written.
+#    Notwithstanding anything to the contrary, IBM PROVIDES THE SAMPLE SOURCE CODE ON AN "AS IS" BASIS AND IBM DISCLAIMS ALL WARRANTIES,
+#    EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
+#    FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND ANY WARRANTY OR CONDITION OF NON-INFRINGEMENT. IBM SHALL NOT BE LIABLE FOR ANY DIRECT,
+#    INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR OPERATION OF THE SAMPLE SOURCE CODE.
+#    IBM HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR MODIFICATIONS TO THE SAMPLE SOURCE CODE.
+
+
+[ req ]
+default_bits			= 2048		# Size of keys
+default_keyfile			= key.pem	# name of generated keys
+default_md				= sha1		# message digest algorithm
+string_mask				= nombstr	# permitted characters
+distinguished_name		= req_distinguished_name
+
+[ req_distinguished_name ]
+0.organizationName			= Organization Name (company)
+organizationalUnitName		= Organizational Unit Name (department, division)
+emailAddress				= Email Address
+emailAddress_max			= 40
+localityName				= Locality Name (city, district)
+stateOrProvinceName			= State or Province Name (full name)
+countryName					= Country Name (2 letter code)
+countryName_min				= 2
+countryName_max				= 2
+commonName					= Common Name (hostname, IP, or your name)
+commonName_max				= 64
+
+
+[ policy_match ]
+countryName             = optional
+stateOrProvinceName    	= optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress           	= optional
+
+[ root_authority ]
+basicConstraints     = CA:TRUE
+subjectKeyIdentifier = hash
+
+[ root_authority_ca_config ]
+dir             = ./rootca
+certs           = $dir/certs
+new_certs_dir  	= $dir/newcerts
+database        = $dir/index.txt
+certificate     = $dir/root_ca.crt
+private_key     = $dir/root_ca_key.pem
+serial			= $dir/serial
+RANDFILE        = $dir/.rand
+policy			= policy_match
+
+[ signing_authority ]
+basicConstraints 		= CA:TRUE, pathlen:0
+subjectKeyIdentifier 	= hash
+authorityKeyIdentifier 	= keyid:always, issuer:always
+
+[ signing_authority_ca_config ]
+dir  			= ./signingca
+certs 			= $dir/certs
+new_certs_dir 	= $dir/newcerts
+database 		= $dir/index.txt
+certificate 	= $dir/signing_ca.crt
+private_key		= $dir/signing_ca_key.pem
+serial			= $dir/serial
+RANDFILE 		= $dir/.rand
+policy 			= policy_match
+email_in_dn		= false
+
+[ server_identity ]
+basicConstraints		= CA:FALSE
+subjectKeyIdentifier	= hash
+authorityKeyIdentifier	= keyid:always,issuer:always

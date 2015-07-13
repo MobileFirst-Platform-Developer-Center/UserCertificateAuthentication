@@ -1,13 +1,13 @@
 IBM MobileFirst Platform Foundation
 ===
-### Sample Name
+### User Certificate Authentication
 
 
 ### Usage
-Follow the instructions in the tutorials listed below.
+Follow the instructions in the tutorial(s) listed below.
 
 ### Tutorials
-
+https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/foundation/authentication-security/client-x-509-certificate-authentication-user-enrollment/
 
 ### Supported Levels
 IBM MobileFirst Platform Foundation 7.1

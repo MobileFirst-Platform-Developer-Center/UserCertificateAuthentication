@@ -29,19 +29,19 @@ sampleAppRealmChallengeHandler.isCustomResponse = function(response)  {
 };
 
 sampleAppRealmChallengeHandler.handleChallenge = function(response)  {
-	$('#startPage').hide();
-	$('#AuthBody').show();
-	$('#passwordInputField').val('');
+	$('#AppBody').hide();
+	$('#AuthDiv').show();
+	$('#AuthPassword').val('');
 };
 
-$('#loginButton').bind('click', function () {
+$('#AuthSubmitButton').bind('click', function () {
 
 	var reqURL = '/j_security_check';
 	var options = {};
 	options.parameters = {
 
-			j_username : $('#usernameInputField').val(),
-			j_password : $('#passwordInputField').val()
+			j_username : $('#AuthUsername').val(),
+			j_password : $('#AuthPassword').val()
 
 	};
 
@@ -54,13 +54,13 @@ sampleAppRealmChallengeHandler.submitLoginFormCallback = function(response) {
 		sampleAppRealmChallengeHandler.handleChallenge(response);
 	} else {
 		sampleAppRealmChallengeHandler.submitSuccess();
-		$('#startPage').show();
-		$('#AuthBody').hide();
+		$('#AppBody').show();
+		$('#AuthDiv').hide();
 	}
 };
 
-$('#cancelButton').bind('click', function() {
+$('#AuthCancelButton').bind('click', function() {
 	sampleAppRealmChallengeHandler.submitFailure();
-	$('#startPage').show();
-	$('#AuthBody').hide();
+	$('#AppBody').show();
+	$('#AuthDiv').hide();
 });

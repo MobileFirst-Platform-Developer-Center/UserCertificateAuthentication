@@ -25,8 +25,10 @@ function wlCommonInit(){
 	 */
 	
 	// Common initialization code goes here
-	
+
 }
+
+
 
 function logout () {
 	console.log('Calling logout');

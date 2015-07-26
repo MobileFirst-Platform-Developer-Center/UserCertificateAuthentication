@@ -11,7 +11,7 @@
 
 -->
 <!-- Attribute "id" must be identical to application folder name -->
-<application xmlns="http://www.worklight.com/application-descriptor" id="UserCertApp" platformVersion="7.0.0.00.20150227-0916">
+<application xmlns="http://www.worklight.com/application-descriptor" id="UserCertApp" platformVersion="7.1.0.00.20150725-0007">
     <displayName>UserCertApp</displayName>
     <description>UserCertApp</description>
     <author>

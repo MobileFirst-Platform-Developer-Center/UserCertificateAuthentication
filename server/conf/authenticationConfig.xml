@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
     COPYRIGHT LICENSE: This information contains sample code provided in source code form. You may copy, modify, and distribute
     these sample programs in any form without payment to IBM® for the purposes of developing, using, marketing or distributing
@@ -59,24 +59,24 @@
        	</customSecurityTest>
        	-->
        	<customSecurityTest name="SubscribeServlet">
-       		<test realm="SubscribeServlet" isInternalUserID="true"/>
+       		<test isInternalUserID="true" realm="SubscribeServlet"/>
        	</customSecurityTest>    	
        	
        	<customSecurityTest name="customx509Tests">
        		<test realm="wl_antiXSRFRealm" step="1"/>
-        	<test realm="wl_directUpdateRealm" mode="perSession" step="1"/>
-        	<test realm="wl_userCertificateAuthRealm" isInternalUserID="true" step="1"/>
-        	<test realm="wl_deviceNoProvisioningRealm" isInternalDeviceID="true" step="2"/>
+        	<test mode="perSession" realm="wl_directUpdateRealm" step="1"/>
+        	<test isInternalUserID="true" realm="wl_userCertificateAuthRealm" step="1"/>
+        	<test isInternalDeviceID="true" realm="wl_deviceNoProvisioningRealm" step="2"/>
        	</customSecurityTest>	
 
 	</securityTests> 
 	
 	<realms>
-		<realm name="SampleAppRealm" loginModule="StrongDummy">
+		<realm loginModule="StrongDummy" name="SampleAppRealm">
 			<className>com.worklight.core.auth.ext.FormBasedAuthenticator</className>
 		</realm>
 		
-		<realm name="SubscribeServlet" loginModule="rejectAll">
+		<realm loginModule="rejectAll" name="SubscribeServlet">
 			<className>com.worklight.core.auth.ext.HeaderAuthenticator</className>			
 		</realm>
 		
@@ -93,12 +93,12 @@
     	</realm -->
     	
     	<!-- For User Certificate Authentication -->
-		<realm name="wl_userCertificateAuthRealm" loginModule="WLUserCertificateLoginModule">
+		<realm loginModule="WLUserCertificateLoginModule" name="wl_userCertificateAuthRealm">
       		<className>com.worklight.core.auth.ext.UserCertificateAuthenticator</className>
-      		<parameter name="dependent-user-auth-realm" value="SampleAppRealm" />
-            <parameter name="pki-bridge-class" value="com.worklight.core.auth.ext.UserCertificateEmbeddedPKI" />
+      		<parameter name="dependent-user-auth-realm" value="SampleAppRealm"/>
+            <parameter name="pki-bridge-class" value="com.worklight.core.auth.ext.UserCertificateEmbeddedPKI"/>
             <parameter name="embedded-pki-bridge-ca-p12-file-path" value="/path/to/certificates/directory/signingca/signing_ca.p12"/> 
-            <parameter name="embedded-pki-bridge-ca-p12-password" value="passSigningP12" />
+            <parameter name="embedded-pki-bridge-ca-p12-password" value="passSigningP12"/>
     	</realm>
     	
     	<!-- For Trusteer Fraud Detection -->
@@ -115,15 +115,15 @@
 	</realms>
 
 	<loginModules>
-		<loginModule name="StrongDummy">
+		<loginModule expirationInSeconds="-1" name="StrongDummy">
 			<className>com.worklight.core.auth.ext.NonValidatingLoginModule</className>
 		</loginModule>
 		
-		<loginModule name="requireLogin">
+		<loginModule expirationInSeconds="-1" name="requireLogin">
 			<className>com.worklight.core.auth.ext.SingleIdentityLoginModule</className>
 		</loginModule>
 		
-		<loginModule name="rejectAll">
+		<loginModule expirationInSeconds="-1" name="rejectAll">
 			<className>com.worklight.core.auth.ext.RejectingLoginModule</className>
 		</loginModule>
 		
@@ -138,7 +138,7 @@
     	</loginModule -->
     	
     	<!-- Login module for User Certificate Authentication -->
-    	<loginModule name="WLUserCertificateLoginModule">
+    	<loginModule expirationInSeconds="-1" name="WLUserCertificateLoginModule">
 			<className>com.worklight.core.auth.ext.UserCertificateLoginModule</className>
 		</loginModule>
 
